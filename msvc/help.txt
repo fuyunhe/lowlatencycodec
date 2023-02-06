@@ -1,0 +1,51 @@
+*******************************************************************************
+*                        ETSI TS 103 634 V1.1.1                               *
+*              Low Complexity Communication Codec Plus (LC3plus)              *
+*                        Software V1.4.2, Jan 21 2020                         *
+* Copyright licence is solely granted through ETSI Intellectual Property      *
+* Rights Policy, 3rd April 2019. No patent licence is granted by implication, *
+* estoppel or otherwise.                                                      *
+*******************************************************************************
+
+Usage: LC3plus [OPTIONS] INPUT OUTPUT BITRATE
+
+  INPUT and OUTPUT are wav files, unless another mode is selected in OPTIONS.
+  BITRATE is specified in bits per second. Alternatively a switching file can
+  be provided.
+
+General options:
+  -E                      Encode mode. INPUT is a wav file, OUTPUT is a binary file.
+  -D                      Decode mode. INPUT is a binary file, OUTPUT is a wav file.
+                          In decode mode the BITRATE parameter is ignored.
+  -bps NUM                Output bits per sample. NUM must be 16 (default) or 24.
+  -swf FILE               Use a bitrate switching file instead of fixed bitrate.
+  -dc NUM                 0: Don't use delay compensation
+                          1: Compensate delay in decoder (default)
+                          2: Split delay equally in encoder and decoder
+  -frame_ms               NUM Frame length in ms. NUM must be 10 (default), 5 or 2.5.
+  -bandwidth NUM|FILE     Select audio bandwidth limitation via value in Hz or switching file.
+                          NUM can be any integer value describing the bandwidth; max NUM=20000 Hz
+  -q                      Disable frame counter printout
+  -v                      Verbose switching commands
+
+Format options:
+  -formatG192             Activate G192 bitstream format. A filename.cfg will be used to
+                          store/load decoder info.
+  -cfgG192 FILE           Specify a configuration file for G192 bitstream format.
+
+PLC options:
+  -epf FILE               Enable packet loss simulation using error pattern from FILE.
+  -ept                    Use together with -E -epf FILE to create bitstream triggering
+                          PLC via special value of lastnz
+  -edf FILE               Write error detection pattern to FILE.
+
+Channel coder options:
+  -epmode NUM|FILE        Error protection mode. NUM must be one of the following:
+                          0: Error protection disabled
+                          1: Minimum error protection, detection only
+                          2: Moderate error protection
+                          3: Strong error protection
+                          4: Maximum error protection
+  -ep_dbg FILE            Save variables bfi, epmr and error report to binary files
+                          FILE.bfi, FILE.epmr and FILE.error_report
+
